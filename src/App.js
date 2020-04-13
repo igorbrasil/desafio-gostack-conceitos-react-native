@@ -21,19 +21,19 @@ export default function App() {
   }, []);
 
   async function handleLikeRepository(id) {
-    // Implement "Like Repository" functionality
-    const response = await api.post(`/repositories/${id}/like`);
-    //const techs = repositories.find();
-    const repositoryLike = response.data;
+    const response = await api.post(`repositories/${id}/like`);
 
-    const listRepositories = repositories.map((repo) => {
-      if (repo.id === id) {
-        return repositoryLike;
+    const likedRepository = response.data;
+
+    const repositoriesUpdated = repositories.map((repository) => {
+      if (repository.id === id) {
+        return likedRepository;
       } else {
-        return repo;
+        return repository;
       }
     });
-    setRepositories(listRepositories);
+
+    setRepositories(repositoriesUpdated);
   }
 
   return (
